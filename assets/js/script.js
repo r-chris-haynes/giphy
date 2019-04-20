@@ -48,13 +48,10 @@ $("#buttons-view").on("click", ".players", function(){
 
       var playerImg = $("<img>");
       playerImg.attr("src", response.data[i].images.fixed_height_still.url);
-      // playerImg.attr("data-state", still);
+      playerImg.attr("data-state", "still");
+      playerImg.attr("data-still", response.data[i].images.fixed_height_still.url);
+      playerImg.attr("data-animate", response.data[i].images.fixed_height.url )
       playerImg.addClass("gif m-2");
-      
-      var movPlayerImg = $("<img>");
-      movPlayerImg.attr("src", response.data[i].images.fixed_height.url);
-      // movPlayerImg.attr("data-state", animate);
-      movPlayerImg.addClass("gif m-2");
       
       var rating = $("<p>");
       rating.addClass("m-2");
@@ -62,18 +59,18 @@ $("#buttons-view").on("click", ".players", function(){
     
     gifDiv.prepend(playerImg, rating);
     
-      // $(".gif").on("click", function() {
+      $(".gif").on("click", function() {
         
-      //   var state = this.attr("data-state")
-        
-      //   if (state === "still") {
-      //     $(this).attr("src", $(this).attr("data-animate"));
-      //     $(this).attr("data-state", "animate");
-      //   } else {
-      //     $(this).attr("src", $(this).attr("data-still"));
-      //     $(this).attr("data-state", "still");
-      //   }
-      // })
+        var state = $(this).attr("data-state")
+        console.log("i clicked")
+        if (state === "still") {
+          $(this).attr("src", $(this).attr("data-animate"));
+          $(this).attr("data-state", "animate");
+        } else {
+          $(this).attr("src", $(this).attr("data-still"));
+          $(this).attr("data-state", "still");
+        }
+      })
   }
     
 })
