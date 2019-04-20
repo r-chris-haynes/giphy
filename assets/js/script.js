@@ -2,16 +2,16 @@ var topics = ["Magic Johnson", "Michael Jordan", "Larry Bird", "Charles Barkley"
     "Kobe Bryant", "Lebron James", "Baron Davis", "Rasheed Wallace", "Tim Duncan",
     "Larry Johnson", "Muggsy Bogues", "Scottie Pippen", "Patrick Ewing"];
 
-//===================================================================================
 
-//display players' button
+    //===================================================================================
+
+
 renderButtons();
 
-// create new player
+
 $("#add-player").on("click", createNewButton);
 
-//get gifs 
-// $(document).on("click", ".players", getPlayerGifs);
+
 
 //===================================================================================
 
@@ -40,18 +40,41 @@ $("#buttons-view").on("click", ".players", function(){
     url: queryURL,
     method: "GET"
   }).then(function(response){
-    console.log(response);
+    // console.log(response);
     for(var i = 0; i < 10; i++) {
-      var gifDiv = $("<div>");
+     
+      var gifDiv = $("#gifDisplay");
+
+
       var playerImg = $("<img>");
-      playerImg.attr("src", response.data[i].images.fixed_height_still.url)
+      playerImg.attr("src", response.data[i].images.fixed_height_still.url);
+      // playerImg.attr("data-state", still);
       playerImg.addClass("gif m-2");
+      
+      var movPlayerImg = $("<img>");
+      movPlayerImg.attr("src", response.data[i].images.fixed_height.url);
+      // movPlayerImg.attr("data-state", animate);
+      movPlayerImg.addClass("gif m-2");
+      
       var rating = $("<p>");
       rating.addClass("m-2");
       rating.text("Rating: " + response.data[i].rating);
-      console.log(gifDiv);
-    $("#gifDisplay").prepend(playerImg, rating);
-    }
+    
+    gifDiv.prepend(playerImg, rating);
+    
+      // $(".gif").on("click", function() {
+        
+      //   var state = this.attr("data-state")
+        
+      //   if (state === "still") {
+      //     $(this).attr("src", $(this).attr("data-animate"));
+      //     $(this).attr("data-state", "animate");
+      //   } else {
+      //     $(this).attr("src", $(this).attr("data-still"));
+      //     $(this).attr("data-state", "still");
+      //   }
+      // })
+  }
     
 })
 })
